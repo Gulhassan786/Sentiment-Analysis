@@ -12,7 +12,7 @@ Had created the sentiment analysis model on <bold> Movie reviews dataset</bold>.
 
 
 SVM give good accuraccy then other models so i prefered to go with it. <b>Accuracy of the model is 0.89 </b>.
-<h2>How i get work done</h2>
+<h3>Steps for Model training</h3>
 <ol> 
   <li>Readed the data using pandas, Removed the any number or special symbols by applying regex on data</li>
    <li>Removed stop words (common words in english) from the reviews for batter accuracy </li>
