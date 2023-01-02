@@ -16,7 +16,7 @@ SVM give good accuraccy then other models so i prefered to go with it. <b>Accura
 <ol> 
   <li>Readed the data using pandas, Removed the any number or special symbols by applying regex on data</li>
    <li>Removed stop words (common words in english) from the reviews for batter accuracy </li>
-   <li>Sorted those strings of data into list</li>
+   <li>Sotred those strings of data into list</li>
    <li> Created Bag Of Words (BOW) using TFIDF Vectorizer so can feed it to the model for training </li>
    <li>Created Model, selected its hyper parameters and passed it BOW as well as y data set for traing</li>
    <li>After training we used x test data to test the model performance</li>
