@@ -5,6 +5,7 @@ import pickle
 import nltk
 from nltk.corpus import stopwords
 from streamlit_lottie import st_lottie
+from PIL import Image
 
 svm = pickle.load(open("svm.pkl","rb"))
 tfidfvector = pickle.load(open("tfidf.pkl","rb"))
@@ -37,98 +38,112 @@ def txt_processing (txt):
 def csv_preprocessing (data):
     tfidf_predict_dataset = pd.read_csv(data)
 
-    data.seek(0)
-    data_to_show_user = pd.read_csv(data)
+    if "review" in tfidf_predict_dataset.columns:
 
-    nltk.download("stopwords")
-    stop_words = [elements.lower() for elements in set(stopwords.words("english"))]
+        tfidf_predict_data = tfidf_predict_dataset["review"]
+        data.seek(0)
+        data_to_show_user = pd.read_csv(data)
 
-    data = tfidf_predict_dataset["review"].str.lower()
-    data.replace("[^a-zA-Z]"," ", regex=True, inplace=True)
+        nltk.download("stopwords")
+        stop_words = [elements.lower() for elements in set(stopwords.words("english"))]
+
+        data = tfidf_predict_data.str.lower()
+        data.replace("[^a-zA-Z]"," ", regex=True, inplace=True)
 
 
-    def remove_stop (x):
-        return ",".join([words for words in str(x).split() if words not in stop_words])
+        def remove_stop (x):
+            return ",".join([words for words in str(x).split() if words not in stop_words])
 
-    data = data.apply(lambda x: remove_stop(x))
+        data = data.apply(lambda x: remove_stop(x))
 
-    predict_array = []
-    for row in range(0, len(data.index)):
-            predict_array.append("".join(x for x in data.iloc[row] ))
-    tfidf_predict_data = tfidfvector.transform(predict_array)
+        predict_array = []
+        for row in range(0, len(data.index)):
+                predict_array.append("".join(x for x in data.iloc[row] ))
+        tfidf_predict_data = tfidfvector.transform(predict_array)
 
-    predictions = svm.predict(tfidf_predict_data)
+        predictions = svm.predict(tfidf_predict_data)
 
-    pos = 0
-    neg = 0
-    if len(predictions)>2:
-        
-        for i in predictions:
-            if i == 1:
-                pos +=1
-            else:
-                neg +=1
-    st.write(f"{pos} positive reviews and {neg} negative reviews")
+        pos = 0
+        neg = 0
+        if len(predictions)>2:
+            
+            for i in predictions:
+                if i == 1:
+                    pos +=1
+                else:
+                    neg +=1
+        st.markdown(f"{pos} positive reviews and {neg} negative reviews")
 
-        # Inserting new column to the users data and will give it back to the user
-    @st.cache
-    def convert_df(data, predictions):
+            # Inserting new column to the users data and will give it back to the user
+        @st.cache
+        def convert_df(data, predictions):
 
-        data["label"] = 2
-        for i in range(0,len(predictions)):
-            data["label"][i] = predictions[i]
+            data["label"] = 2
+            for i in range(0,len(predictions)):
+                data["label"][i] = predictions[i]
 
-        return data
+            return data
 
-    data_to_show_user = convert_df(data_to_show_user, predictions)
-    st.write(data_to_show_user.head(10))
-    data_to_show_user = data_to_show_user.to_csv().encode('utf-8')
-        
-    st.download_button(
-            label="Download data as CSV",
-            data = data_to_show_user,
-            file_name="sentiment.csv",
-            mime="csv",
-        )
+        data_to_show_user = convert_df(data_to_show_user, predictions)
+        st.write(data_to_show_user.head(10))
+        data_to_show_user = data_to_show_user.to_csv().encode('utf-8')
+            
+        st.download_button(
+                label="Download data as CSV",
+                data = data_to_show_user,
+                file_name="sentiment.csv",
+                mime="csv",
+            )
+    else:
+        st.write("csv must contain review column")
 
+# function for reading animation avaiable in jason format
 def load_lottiefile(filepath: str):
 
     with open(filepath, "r", encoding="utf8") as f:
         return json.load(f)
 
-if __name__ == '__main__':
+def main():
 
-    st.set_page_config(page_title="Sentiment Detection", page_icon="🤗")
-    # ui_width = st_js.st_javascript("window.innerWidth")
-    lottie_coding = load_lottiefile("assets/robotrun.json") 
-    lottie_coding2 = load_lottiefile("assets/dancerobot.json") 
-    st_lottie(lottie_coding2, speed=1, reverse=False, loop=True, quality="high", # medium ; high height= 200,
-        width= 200,
-        key="animation",)
+    banner = Image.open("assets/chat.png")
+    st.set_page_config(page_title="Sentiment Detection", page_icon=banner, )
 
+    image = Image.open("assets/banner.jpg")
+    st.image(image, width= 500)
+
+     # css to hide main, footer and header given by streamlit default
     hide_st_menu = """
     <style>
     #MainMenu {visibility: hidden;}
     footer "{visibility: hidden;}
     header {visibility: hidden;}
+    # .css-12oz5g7 {background-color:#e6e6ff}
+    # .css-1t6ys2s {padding-left: 15rem}
     </style>
     """
+    # code to apply above css in python
     st.markdown(hide_st_menu, unsafe_allow_html=True)
+
     st.header("Sentiment Analysis 🙂")
-        
+    
     # dropdown for the text input
     with st.expander("Analyze Text"):
     # taking text as input from the user
         txt = st.text_input("Write text here: ")
         # Checking if text is given the do preprocessing and predition and show it to the user
         if txt:
+            # Method to preprocess the data
             txt_processing(txt)
 
     # Dropdown for the csv input so, user can upload csv 
     with st.expander("Analyze CSV: "):
         # Getting csv from the user and storing it in varaible so later will use it for prediction
-        data = st.file_uploader("Upload file must conatin review column", type="csv")
+        data = st.file_uploader("CSV must contain column review", type="csv")
         # checking if file is uploaded so, can procced to preprocessing and prediction
         if data:
+            # Method to preprocess the data
             csv_preprocessing(data)
         
+# Calling main function here to run our app
+if __name__ == '__main__':
+    main()
