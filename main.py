@@ -7,6 +7,7 @@ from nltk.corpus import stopwords
 from streamlit_lottie import st_lottie
 from PIL import Image
 
+# Importing svm trained model and fited tfidf vectorizer
 svm = pickle.load(open("svm.pkl","rb"))
 tfidfvector = pickle.load(open("tfidf.pkl","rb"))
 
