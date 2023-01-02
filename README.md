@@ -38,5 +38,3 @@ SVM give good accuraccy then other models so i prefered to go with it. <b>Accura
 <h3> Web App Link</h3>
 <button her> </button>
 <a href="https://sentiment-detection.streamlit.app">Checkout Model by yourself </a>
-<button onclick="window.location.href = 'https://sentiment-detection.streamlit.app';">Click Me</button>
-
