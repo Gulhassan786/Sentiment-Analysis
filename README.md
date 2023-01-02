@@ -28,8 +28,8 @@ SVM give good accuraccy then other models so i prefered to go with it. <b>Accura
 
 <ol> 
   <li> you will see the <b> assests folder</b> it contain images that, had used in web app as i had deployed model on web</li>
-  <li>You will find dataset and <b>.ipynb </b> file in which there is complete code of from data preprocessing and how i trained the model</li>
-  <li>You will find few files with <b> .pkl </b> extension might be you are thinking why i had those file, whats there need so, I trained model and want to created web app but i have to write whole code for training and test in the that web app it will be not good approach as i had trained model so, i had export trained model using python pickle library. with those files i can use my trained model for prediction directly and also it reduces the code end training time. </li>
+  <li>You will find dataset and <b>.ipynb </b> file in the <b>python_model_code folder</b> which there is complete code of from data preprocessing and how i trained the model</li>
+  <li>You will find few files with <b> .pkl </b> extension in <b> pkl_files folder </b> might be you are thinking why i had those files, what is there need so, I trained model and want to created web app but i have to write whole code for training and test in the that web app it will be not good approach as i had trained model so, i had export trained model using python pickle library. with those files i can use my trained model for prediction directly and also it reduces the code end training time. </li>
   <li> <b> main.py </b> is file for web app. I had written  web app code in that file using streamlit library from python </li>
   <li> <b>Requirements.txt</b> file contain libraries that i need to install on server when i will deploy my web app on the server so, my model can be accessed and used easily through out the world </li>
 </ol>
