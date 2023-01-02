@@ -99,10 +99,6 @@ def csv_preprocessing (data):
         st.write("csv must contain review column")
 
 # function for reading animation avaiable in jason format
-def load_lottiefile(filepath: str):
-
-    with open(filepath, "r", encoding="utf8") as f:
-        return json.load(f)
 
 def main():
 
