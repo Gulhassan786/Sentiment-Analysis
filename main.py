@@ -110,7 +110,7 @@ def main():
     st.set_page_config(page_title="Sentiment Detection", page_icon=banner, )
 
     image = Image.open("assets/banner.jpg")
-    st.image(image, width= 250)
+    st.image(image, width= 280)
 
      # css to hide main, footer and header given by streamlit default
     hide_st_menu = """
