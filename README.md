@@ -1,4 +1,4 @@
-# Sentiment-Analysis
+# Sentiment-Analysis 🙂
 <br>
 <h1> About Model </h1>
 Had created the sentiment analysis model on <bold> Movie reviews dataset</bold>. Trained 4 machine learning models on same dataset such as 
@@ -12,6 +12,17 @@ Had created the sentiment analysis model on <bold> Movie reviews dataset</bold>.
 
 
 SVM give good accuraccy then other models so i prefered to go with it. <b>Accuracy of the model is 0.89 </b>.
+<h2>How i get work done</h2>
+<ol> 
+  <li>Readed the data using pandas, Removed the any number or special symbols by applying regex on data</li>
+   <li>Removed stop words (common words in english) from the reviews for batter accuracy </li>
+   <li>Sorted those strings of data into list</li>
+   <li> Created Bag Of Words (BOW) using TFIDF Vectorizer so can feed it to the model for training </li>
+   <li>Created Model, selected its hyper parameters and passed it BOW as well as y data set for traing</li>
+   <li>After training we used x test data to test the model performance</li>
+   <li>Used different methods such as cofusion matrix and accuracy score to check model performance</li>
+</ol>
+
 <br>
 <h2> Folder Structure </h2>
 
