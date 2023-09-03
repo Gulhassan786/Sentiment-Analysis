@@ -10,7 +10,7 @@ from PIL import Image
 # Importing svm trained model and fited tfidf vectorizer
 svm = pickle.load(open("pkl_files/svm.pkl","rb"))
 tfidfvector = pickle.load(open("pkl_files/tfidf.pkl","rb"))
-st.server.run(blocking=False)
+
 def txt_processing (txt):
             
         lst_data = txt.lower()
