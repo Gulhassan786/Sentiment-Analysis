@@ -43,7 +43,7 @@ SVM gives good accuracy than other models so I preferred to go with it. <b>Accur
 
 <ul>
 
-    <li> <a href="https://github.com/gulhassan786" >Github</a></li>
+<li> <a href="https://github.com/gulhassan786" >Github</a></li>
  <li> <a href="https://www.linkedin.com/in/gul-hassan-7b188b202/">LinkedIn</a></li>
   <li> <a href="https://www.kaggle.com/hassangul">Kaggle</a></li>
  <li> <a href="https://medium.com/@gulhassanh49">Medium</a></li> 
